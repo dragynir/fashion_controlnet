@@ -51,3 +51,5 @@ Install clip
 # cd C:\Projects\FireBall\ControlNetMain
 # python tutorial_clip_caption.py
 
+# TODO Real TODO list (training 1024, training as SDXL)
+
