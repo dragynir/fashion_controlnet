@@ -218,7 +218,7 @@ These are controlnet weights trained on {base_model} with new type of conditioni
 {img_str}
 """
 
-    with open(os.path.join(repo_folder, "README.md"), "w") as f:
+    with open(os.path.join(repo_folder, "../README.md"), "w") as f:
         f.write(yaml + model_card)
 
 

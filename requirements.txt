@@ -3,4 +3,6 @@ torchvision
 transformers>=4.25.1
 ftfy
 tensorboard
+Jinja2
 datasets
+wandb
