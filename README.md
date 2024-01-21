@@ -28,8 +28,16 @@ You can create your own caption with [clip_caption.py](examples/controlnet/clip_
 * **Control Net**: 
 
 
-# TODO 
-Добавить файл с caption в репозиторий;
+# Inference
+
+
+
+# Data and weights
+
+
+
+# TODO Training
+
 Добавить структуру датасета - как файлы для обучения лежат
 
 
