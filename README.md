@@ -18,7 +18,7 @@ condition
 
 # Inference
 
-You can find inference script in [inference.py](src/inference.py). Run it with prepared mask or with image to extract mask.
+You can find inference script in [inference.py](src/inference.py). Run it with prepared mask or with image to extract mask first.
 
 Also, check out huggingface space app [TODO space](space). And colab inference script [TODO colab](colab)
 
@@ -60,6 +60,7 @@ Install clip
 # python tutorial_clip_caption.py
 
 # TODO Real TODO list (training 1024, training as SDXL)
-[ ] - 
-[ ] - Check English spelling
+
+- [ ] ...
+- [ ] Check English spelling
 
