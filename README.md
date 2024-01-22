@@ -79,7 +79,7 @@ You can find changed configuration parameters at [config.py](src/config.py).
 SDXL's VAE is known to suffer from numerical instability issues.
 You need to specify the location of a better VAE ( [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix)).
 
-Download diffusion_pytorch_model.bin and config.json files and put them to ./weights/better_vae folder.
+Download `diffusion_pytorch_model.bin` and `config.json` files and put them to `./weights/better_vae folder`.
 
 
 
