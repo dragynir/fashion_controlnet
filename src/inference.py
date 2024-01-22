@@ -16,23 +16,23 @@ from unet.predictor import generate_mask, load_seg_model
 device = torch.device('cuda')
 
 # models--stabilityai--stable-diffusion-xl-base-1.0 path
-base_model_path = '/pub/home/korostelev/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0/snapshots/462165984030d82259a11f4367a4eed129e94a7b'
+base_model_path = 'stabilityai/stable-diffusion-xl-base-1.0'
 
 # controlnet checkpoint path
-controlnet_path = '/pub/home/korostelev/diffusers/examples/controlnet/fashion_training/checkpoint-45000/controlnet'
+controlnet_path = './fashion_training/checkpoint-45000/controlnet'
 
 # vae model path
-vae_path = '/pub/home/korostelev/.cache/huggingface/hub/sdxl-vae-fp16-fix'
+vae_path = 'madebyollin/sdxl-vae-fp16-fix'
 
 # pretrained segmentation model path
 segmentation_model_path = './weights/cloth_segm.pth'
 
 # directory to write output image
-output_dir = '/pub/home/korostelev/diffusers/examples/controlnet/outputs'
+output_dir = './outputs'
 
 # Example: load image, extract segmentation mask with unet and use it as condition
 control_image = load_image(
-    '/pub/home/korostelev/data/diffusion/train/7fb8e9647ebb8a25d6dc9ab837a36a49.jpg',
+    './data/train/7fb8e9647ebb8a25d6dc9ab837a36a49.jpg',
 )
 prompt = 'Maya, Brazilian, Tan skin, gorgeous middle aged woman, white background, short hair, , standing, facing front. HD, ((((((((((((show whole body)))))), no shadows, cartoon , wearing a black mini skirt, full frame , 35mm WIDE ANGLE SHOT, 80s STYLES, MAKE IMAGE INTO 3D , coloring book, vector, normal chest'
 is_mask_ready = False
@@ -40,7 +40,7 @@ controlnet_input_size = 512
 
 
 # Example: load segmentation mask and use it as condition
-# control_image = load_image('/pub/home/korostelev/data/diffusion/train_condition_images/7fbe43fc176a8719a42f7e6bb47e4819.png')
+# control_image = load_image('./data/train_condition_images/7fbe43fc176a8719a42f7e6bb47e4819.png')
 # prompt = 'Maya, Brazilian, Tan skin, gorgeous middle aged woman, white background, short hair, full face, standing, facing front. HD, ((((((((((((show whole body)))))), no shadows, cartoon , wearing a black mini skirt, full frame , 35mm WIDE ANGLE SHOT, 80s STYLES, MAKE IMAGE INTO 3D , coloring book, vector, normal chest'
 # is_mask_ready = True
 # controlnet_input_size = 512

@@ -37,8 +37,8 @@ class TrainingConfig:
 
 
 training_config = TrainingConfig(
-    pretrained_model_name_or_path='/pub/home/korostelev/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0/snapshots/462165984030d82259a11f4367a4eed129e94a7b',
-    pretrained_vae_model_name_or_path='/pub/home/korostelev/.cache/huggingface/hub/sdxl-vae-fp16-fix',
+    pretrained_model_name_or_path='stabilityai/stable-diffusion-xl-base-1.0',
+    pretrained_vae_model_name_or_path='madebyollin/sdxl-vae-fp16-fix',  # or './weights/sdxl-vae-fp16-fix'
     output_dir='./fashion_training',
     dataset_name=None,
     train_data_dir='./data/train',

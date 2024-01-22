@@ -74,15 +74,13 @@ You can find changed configuration parameters at [config.py](src/config.py).
     └── label_descriptions.json
 
 
-Install clip
-# Установка
-# pip install clip-interrogator==0.5.4
-# pip uninstall transformers
-# pip install transformers==4.26.1
+## Models
 
-# conda activate clip-interrogator
-# cd C:\Projects\FireBall\ControlNetMain
-# python tutorial_clip_caption.py
+SDXL's VAE is known to suffer from numerical instability issues.
+You need to specify the location of a better VAE ( [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix)).
+Download diffusion_pytorch_model.bin and config.json files and put them to ./weights/better_vae folder.
+
+
 
 # TODO Real TODO list (training 1024, training as SDXL)
 
