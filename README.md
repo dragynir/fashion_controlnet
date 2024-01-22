@@ -74,7 +74,7 @@ You can find changed configuration parameters at [config.py](src/config.py).
     └── label_descriptions.json
 
 
-## Models
+## Better VAE
 
 SDXL's VAE is known to suffer from numerical instability issues.
 You need to specify the location of a better VAE ( [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix)).
