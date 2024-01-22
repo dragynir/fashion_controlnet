@@ -367,12 +367,12 @@ class FashionDataset:
 if __name__ == '__main__':
 
     dataset = FashionDataset(
-        image_dir='/pub/home/korostelev/data/diffusion/train',
-        df_path='/pub/home/korostelev/data/diffusion/train.csv',
-        attributes_path='/pub/home/korostelev/data/diffusion/label_descriptions.json',
-        caption_path='/pub/home/korostelev/data/diffusion/caption.csv',
+        image_dir='./data/train',
+        df_path='./data/train.csv',
+        attributes_path='./data/label_descriptions.json',
+        caption_path='./data/caption.csv',
         resolution=1024,
         max_images=None,
         condition_from_disk=False,
     )
-    dataset = dataset.save_condition_images()
+    dataset.save_condition_images()

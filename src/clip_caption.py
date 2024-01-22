@@ -49,16 +49,16 @@ def run_clip(folder_path: str, prompt_mode: str) -> None:
             df = pd.DataFrame()
             df[f'{prompt_mode}_clip_prompts'] = prompts
             df['ImageId'] = proc_files
-            df.to_csv('./training/iMaterialist(Fashion)/caption.csv', index=False)
+            df.to_csv('./data/caption.csv', index=False)
 
     df = pd.DataFrame()
     df[f'{prompt_mode}_clip_prompts'] = prompts
     df['ImageId'] = proc_files
-    df.to_csv('./training/iMaterialist(Fashion)/caption.csv', index=False)
+    df.to_csv('./data/caption.csv', index=False)
 
 
 if __name__ == '__main__':
     # Palit GeForce RTX 4080 12GB, fast, 45k images: takes 6 hours
-    images_folder_path = './training/iMaterialist(Fashion)/train'
+    images_folder_path = './data/train'
     prompt_mode = 'fast'  # @param ['best','fast','classic','negative']
     run_clip(images_folder_path, prompt_mode)

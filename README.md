@@ -48,19 +48,24 @@ You can find changed configuration parameters at [config.py](src/config.py).
 ## Data Preparation
 
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
+2) Run [clip_caption.py](examples/controlnet/clip_caption.py) to extract prompts from images or use precomputed [file: TODO upload caption.csv to hugginface data/ folder]().
+3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
+4) Validation masks are already in validation [folder](data/validation) TODO put some masks here.
 
-> **A:** Because you don't want to test the code, you want to test the *program*.
+### The final directory structure should be
 
-    .
-    ├── ...
-    ├── test                    # Test files (alternatively `spec` or `tests`)
-    │   ├── benchmarks          # Load and stress tests
-    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
-    │   └── unit                # Unit tests
-    └── ...
-
-
-Добавить структуру датасета - как файлы для обучения лежат
+    .data/
+    ├── train/                   # train images   
+    │   ├── image1.jpg          
+    │   ├── image2.jpg
+    ├── train_condition_images/  # train images masks
+    │   ├── image1.png          
+    │   ├── image2.png
+    ├── test/   
+    ├── validation/   
+    ├── train.csv
+    ├── caption.csv              # caption created by clip_caption.py
+    └── label_descriptions.json
 
 
 Install clip
