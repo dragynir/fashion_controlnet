@@ -45,6 +45,12 @@ You can find changed configuration parameters at [config.py](src/config.py).
 
 # Training
 
+## Installation
+
+- Python >= 3.9
+- `pip install -r requirements.txt`
+
+
 ## Data Preparation
 
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
