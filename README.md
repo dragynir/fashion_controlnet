@@ -43,8 +43,22 @@ You can create your own caption with [clip_caption.py](examples/controlnet/clip_
 You can find changed configuration parameters at [config.py](src/config.py).
 
 
+# Training
 
-# TODO Training
+## Data Preparation
+
+1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
+
+> **A:** Because you don't want to test the code, you want to test the *program*.
+
+    .
+    ├── ...
+    ├── test                    # Test files (alternatively `spec` or `tests`)
+    │   ├── benchmarks          # Load and stress tests
+    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    │   └── unit                # Unit tests
+    └── ...
+
 
 Добавить структуру датасета - как файлы для обучения лежат
 
