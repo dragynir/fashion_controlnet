@@ -45,20 +45,20 @@ You can find changed configuration parameters at [config.py](src/config.py).
 
 # Training
 
-## Installation
+### Installation
 
 - Python >= 3.9
 - `pip install -r requirements.txt`
 
 
-## Data Preparation
+### Data Preparation
 
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
 2) Run [clip_caption.py](examples/controlnet/clip_caption.py) to extract prompts from images or use precomputed [file: TODO upload caption.csv to hugginface data/ folder]().
 3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
 4) Validation masks are already in validation [folder](data/validation) TODO put some masks here.
 
-### The final directory structure should be
+#### The final directory structure should be
 
     .data/
     ├── train/                   # train images   
@@ -74,10 +74,11 @@ You can find changed configuration parameters at [config.py](src/config.py).
     └── label_descriptions.json
 
 
-## Better VAE
+# Better VAE
 
 SDXL's VAE is known to suffer from numerical instability issues.
 You need to specify the location of a better VAE ( [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix)).
+
 Download diffusion_pytorch_model.bin and config.json files and put them to ./weights/better_vae folder.
 
 
