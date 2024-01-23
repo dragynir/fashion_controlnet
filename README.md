@@ -10,10 +10,8 @@ image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/sta
 
 TODO: Video demo
 
-Here we have 3 category: Upper body(red), Lower body(green) and Full body(blue)
-condition 
-![Sample 000](assets/000.png)
-![Sample 001](assets/001.png)
+Example image with extracted mask.
+![Sample 000](assets/013.png)
 
 
 # Inference
