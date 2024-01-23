@@ -85,7 +85,9 @@ Download `diffusion_pytorch_model.bin` and `config.json` files and put them to `
 
 # TODO Real TODO list (training 1024, training as SDXL)
 
+- [ ] обучить модель а 1024x1024
 - [ ] добавить caption.csv в data/
+- [ ] закрыть todo в readme
 - [ ] прокинуть параметры в демке (seed и т д)
 - [ ] настроить запуск в hugging space
 - [ ] обновить видео
