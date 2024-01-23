@@ -8,7 +8,8 @@ TODO: colab using hugging face
 This repo contains training code, inference code and pre-trained model for 
 image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
 
-TODO: Video demo
+assets/demo.webm
+
 
 Example image with extracted mask
 ![Sample 000](assets/013.png)
