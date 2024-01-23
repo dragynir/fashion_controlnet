@@ -10,7 +10,7 @@ image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/sta
 
 TODO: Video demo
 
-Example image with extracted mask.
+Example image with extracted mask
 ![Sample 000](assets/013.png)
 
 
