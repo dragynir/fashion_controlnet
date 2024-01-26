@@ -75,13 +75,10 @@ if not is_mask_ready:
     detected_map_original = generate_mask(
         control_image, segmentation_model, device=device
     )
-    detected_map = np.stack(
-        [detected_map_original, detected_map_original, detected_map_original], axis=-1
-    )
-
-    source = (detected_map.astype(np.float32) / 3.0) * 255
-    source = np.clip(source, 0, 255)
-    control_image = Image.fromarray(source.astype('uint8'), 'RGB')
+    ch1 = (detected_map_original == 1) * 255  # Upper body(red)
+    ch2 = (detected_map_original == 2) * 255  # Lower body(green)
+    ch3 = (detected_map_original == 3) * 255  # Full body(blue).
+    control_image = Image.fromarray(np.stack([ch1, ch2, ch3], axis=-1).astype('uint8'), 'RGB')
 
 
 control_image = adaptive_resize(control_image, target_image_size=512, max_image_size=768, divisible=64)
