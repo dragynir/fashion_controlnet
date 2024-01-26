@@ -73,13 +73,23 @@ You can find changed configuration parameters at [config.py](src/config.py).
     ├── caption.csv              # caption created by clip_caption.py
     └── label_descriptions.json
 
+### Run training
 
-# Better VAE
+TODO
 
-SDXL's VAE is known to suffer from numerical instability issues.
-You need to specify the location of a better VAE ( [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix)).
+# Major Changes in Training/Inference
 
-Download `diffusion_pytorch_model.bin` and `config.json` files and put them to `./weights/better_vae folder`.
+1) SDXL's VAE is known to suffer from numerical instability issues.
+So i used [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix) as recomended in diffusers README_sdxl.md.
+With default one i have got NaNs in fp16 training.
+
+
+2) Added `compute_adaptive_hw` function that prepare `crop_top_left` and `original_image_size` to pass into Unet.
+This helps to match controlnet with original controlnet training, see Micro-Conditioning in original [SDXL paper](https://arxiv.org/pdf/2307.01952.pdf).
+
+
+3) Adaptive image resizing to keep original image aspect ratio during inference.
+
 
 
 
