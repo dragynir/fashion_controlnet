@@ -51,7 +51,7 @@ With default one i have got NaNs in fp16 training.
 
 2) Added `compute_adaptive_hw` function that prepare `crop_top_left` and `original_image_size` to pass into Unet.
 This helps to match controlnet with original controlnet training, see Micro-Conditioning in original [SDXL paper](https://arxiv.org/pdf/2307.01952.pdf).
-
+TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! describe
 
 3) Adaptive image resizing to keep original image aspect ratio during inference.
 
