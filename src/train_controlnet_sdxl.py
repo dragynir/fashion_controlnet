@@ -218,7 +218,7 @@ These are controlnet weights trained on {base_model} with new type of conditioni
 {img_str}
 """
 
-    with open(os.path.join(repo_folder, "../README.md"), "w") as f:
+    with open(os.path.join(repo_folder, "README.md"), "w") as f:
         f.write(yaml + model_card)
 
 
@@ -285,16 +285,12 @@ def parse_args(input_args=None):
         ),
     )
     parser.add_argument(
-        "--crops_coords_top_left_h",
-        type=int,
-        default=0,
-        help=("Coordinate for (the height) to be included in the crop coordinate embeddings needed by SDXL UNet."),
-    )
-    parser.add_argument(
-        "--crops_coords_top_left_w",
-        type=int,
-        default=0,
-        help=("Coordinate for (the height) to be included in the crop coordinate embeddings needed by SDXL UNet."),
+        "--adaptive_coords_hw",
+        action="store_true",
+        default=training_config.adaptive_coords_hw,
+        help=(
+            "Whether or not to pass to unet nonzero crops_coords_top_left_hw"
+        ),
     )
     parser.add_argument(
         "--train_batch_size", type=int, default=training_config.train_batch_size, help="Batch size (per device) for the training dataloader."
@@ -354,7 +350,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--scale_lr",
         action="store_true",
-        default=False,
+        default=training_config.scale_lr,
         help="Scale the learning rate by the number of GPUs, gradient accumulation steps, and batch size.",
     )
     parser.add_argument(
@@ -385,7 +381,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--dataloader_num_workers",
         type=int,
-        default=0,
+        default=training_config.dataloader_num_workers,
         help=(
             "Number of subprocesses to use for data loading. 0 means that the data will be loaded in the main process."
         ),
@@ -449,6 +445,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--set_grads_to_none",
         action="store_true",
+        default=training_config.set_grads_to_none,
         help=(
             "Save more memory by using setting grads to None instead of zero. Be aware, that this changes certain"
             " behaviors, so disable this argument if it causes any problems. More info:"
@@ -508,7 +505,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--proportion_empty_prompts",
         type=float,
-        default=0,
+        default=training_config.proportion_empty_prompts,
         help="Proportion of image prompts to be replaced with empty strings. Defaults to 0 (no prompt replacement).",
     )
     parser.add_argument(
@@ -642,8 +639,10 @@ def encode_prompt(prompt_batch, text_encoders, tokenizers, proportion_empty_prom
 
 
 def prepare_train_dataset(dataset, accelerator):
+
     image_transforms = transforms.Compose(
         [
+            # resize to smallest size, then center crop
             transforms.Resize(args.resolution, interpolation=transforms.InterpolationMode.BILINEAR),
             transforms.CenterCrop(args.resolution),
             transforms.ToTensor(),
@@ -906,29 +905,54 @@ def main(args):
     text_encoder_one.to(accelerator.device, dtype=weight_dtype)
     text_encoder_two.to(accelerator.device, dtype=weight_dtype)
 
+
+    def compute_adaptive_hw(image_batch):
+
+        train_resize = transforms.Resize(args.resolution, interpolation=transforms.InterpolationMode.BILINEAR)
+
+        time_ids_list = []
+        for image in image_batch:
+            original_size = (image.height, image.width)
+            target_size = (args.resolution, args.resolution)
+
+            image = train_resize(image)
+            y1 = max(0, int(round((image.height - args.resolution) / 2.0)))
+            x1 = max(0, int(round((image.width - args.resolution) / 2.0)))
+            crop_top_left = (y1, x1)
+
+            add_time_ids = list(original_size + crop_top_left + target_size)
+            time_ids_list.append(torch.tensor([add_time_ids]))
+
+        return torch.cat(time_ids_list, dim=0)
+
     # Here, we compute not just the text embeddings but also the additional embeddings
     # needed for the SD XL UNet to operate.
     def compute_embeddings(batch, proportion_empty_prompts, text_encoders, tokenizers, is_train=True):
-        original_size = (args.resolution, args.resolution)
-        target_size = (args.resolution, args.resolution)
-        crops_coords_top_left = (args.crops_coords_top_left_h, args.crops_coords_top_left_w)
-        prompt_batch = batch[args.caption_column]
 
+        # Prepare prompts batch
+        prompt_batch = batch[args.caption_column]
         prompt_embeds, pooled_prompt_embeds = encode_prompt(
             prompt_batch, text_encoders, tokenizers, proportion_empty_prompts, is_train
         )
         add_text_embeds = pooled_prompt_embeds
-
-        # Adapted from pipeline.StableDiffusionXLPipeline._get_add_time_ids
-        add_time_ids = list(original_size + crops_coords_top_left + target_size)
-        add_time_ids = torch.tensor([add_time_ids])
-
         prompt_embeds = prompt_embeds.to(accelerator.device)
         add_text_embeds = add_text_embeds.to(accelerator.device)
-        add_time_ids = add_time_ids.repeat(len(prompt_batch), 1)
-        add_time_ids = add_time_ids.to(accelerator.device, dtype=prompt_embeds.dtype)
-        unet_added_cond_kwargs = {"text_embeds": add_text_embeds, "time_ids": add_time_ids}
 
+        if args.adaptive_coords_hw:
+            add_time_ids = compute_adaptive_hw(batch[args.image_column])
+        else:
+            original_size = (args.resolution, args.resolution)
+            target_size = (args.resolution, args.resolution)
+            crops_coords_top_left = (0, 0)
+
+            # Adapted from pipeline.StableDiffusionXLPipeline._get_add_time_ids
+            add_time_ids = list(original_size + crops_coords_top_left + target_size)
+            add_time_ids = torch.tensor([add_time_ids])
+            add_time_ids = add_time_ids.repeat(len(prompt_batch), 1)
+
+        add_time_ids = add_time_ids.to(accelerator.device, dtype=prompt_embeds.dtype)
+
+        unet_added_cond_kwargs = {"text_embeds": add_text_embeds, "time_ids": add_time_ids}
         return {"prompt_embeds": prompt_embeds, **unet_added_cond_kwargs}
 
     # Let's first compute all the embeddings so that we can free up the text encoders
