@@ -1,6 +1,7 @@
 import os
 
 from PIL import Image
+import matplotlib.pyplot as plt
 import numpy as np
 
 from diffusers import (
@@ -12,6 +13,30 @@ from diffusers.utils import load_image
 import torch
 
 from unet.predictor import generate_mask, load_seg_model
+
+
+def adaptive_resize(res_image, target_image_size=512, max_image_size=768, divisible=64):
+
+    assert target_image_size % divisible == 0
+    assert max_image_size % divisible == 0
+    assert max_image_size >= target_image_size
+
+    width, height = res_image.size
+    aspect_ratio = width / height
+
+    if height > width:
+        new_width = target_image_size
+        new_height = new_width / aspect_ratio
+        new_height = (new_height // divisible) * divisible
+        new_height = int(min(new_height, max_image_size))
+    else:
+        new_height = target_image_size
+        new_width = new_height / aspect_ratio
+        new_width = (new_width // divisible) * divisible
+        new_width = int(min(new_width, max_image_size))
+
+    return res_image.resize((new_width, new_height))
+
 
 device = torch.device('cuda')
 
@@ -36,7 +61,6 @@ control_image = load_image(
 )
 prompt = 'Maya, Brazilian, Tan skin, gorgeous middle aged woman, white background, short hair, , standing, facing front. HD, ((((((((((((show whole body)))))), no shadows, cartoon , wearing a black mini skirt, full frame , 35mm WIDE ANGLE SHOT, 80s STYLES, MAKE IMAGE INTO 3D , coloring book, vector, normal chest'
 is_mask_ready = False
-controlnet_input_size = 512
 
 
 # Example: load segmentation mask and use it as condition
@@ -60,8 +84,7 @@ if not is_mask_ready:
     control_image = Image.fromarray(source.astype('uint8'), 'RGB')
 
 
-control_image = control_image.resize((controlnet_input_size, controlnet_input_size))
-
+control_image = adaptive_resize(control_image, target_image_size=512, max_image_size=768, divisible=64)
 
 controlnet = ControlNetModel.from_pretrained(controlnet_path, torch_dtype=torch.float16)
 pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
@@ -90,5 +113,6 @@ def get_concat_h(im1, im2):
     dst.paste(im2, (im1.width, 0))
     return dst
 
-
-get_concat_h(control_image, image).save(os.path.join(output_dir, 'output.png'))
+cnt_image = get_concat_h(control_image, image).save(os.path.join(output_dir, 'output.png'))
+plt.imshow(cnt_image)
+plt.show()

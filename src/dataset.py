@@ -238,15 +238,14 @@ class FashionDataset:
         final_label = first_channel + second_channel * 2 + third_channel * 3
         conflict_mask = (final_label <= 3).astype('uint8')
         source = (conflict_mask) * final_label + (1 - conflict_mask) * 1
-        # оставляю маску как в https://github.com/levindabhi/cloth-segmentation/tree/main
-        # чтобы можно было юзать предобученную сегму
 
-        # Normalize source images to [0, 1]. (У нас четыре класса, поэтому делим на 3
-        # 0, 1, 2, 3
-        source = (source.astype(np.float32) / 3.0) * 255
+        source = np.stack([
+            (source == 1).astype(int) * 255,
+            (source == 2).astype(int) * 255,
+            (source == 3).astype(int) * 255,
+        ], axis=-1)
+
         source = np.clip(source, 0, 255)
-        # Делаем трехканальное изображение
-        source = np.stack([source, source, source], axis=-1)
 
         source = Image.fromarray(source.astype('uint8'), 'RGB')
 
