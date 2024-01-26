@@ -81,7 +81,6 @@ class FashionDataset:
         df_path: str,
         attributes_path: str,
         caption_path: str,
-        resolution: int,
         max_images: Optional[int],
         condition_from_disk: bool,
     ):
@@ -90,8 +89,6 @@ class FashionDataset:
         self.attributes_path = attributes_path
         self.caption_path = caption_path
 
-        self.width = resolution
-        self.height = resolution
         self.metadata = self.prepare_dataset(
             self.df_path, self.caption_path, self.attributes_path
         )
@@ -165,20 +162,18 @@ class FashionDataset:
 
     def create_control_mask(self, item: pd.Series) -> Image:
         """Create control mask from rle."""
+        import matplotlib.pyplot as plt
+        width, height = item['Width'], item['Height']
 
         mask = np.zeros(
-            (len(item['EncodedPixels']), self.width, self.height), dtype=np.uint8
+            (len(item['EncodedPixels']), height, width), dtype=np.uint8
         )
 
         labels = []
         for m, (annotation, label) in enumerate(
             zip(item['EncodedPixels'], item['CategoryId'])
         ):
-            sub_mask = self.rle_decode(annotation, (item['Height'], item['Width']))
-            sub_mask = Image.fromarray(sub_mask)
-            sub_mask = sub_mask.resize(
-                (self.width, self.height), resample=Image.BICUBIC
-            )
+            sub_mask = self.rle_decode(annotation, (width, height))
             mask[m, :, :] = sub_mask
             labels.append(int(label) + 1)
 
@@ -206,7 +201,7 @@ class FashionDataset:
             new_labels.append(0)
             new_masks.append(mask[0, :, :])
 
-        nmx = np.zeros((len(new_masks), self.width, self.height), dtype=np.uint8)
+        nmx = np.zeros((len(new_masks), height, width), dtype=np.uint8)
         for i, n in enumerate(new_masks):
             nmx[i, :, :] = n
 
@@ -214,10 +209,10 @@ class FashionDataset:
         labels = torch.as_tensor(new_labels, dtype=torch.int64)
         masks = torch.as_tensor(nmx, dtype=torch.uint8)
 
-        final_label = np.zeros((self.width, self.height), dtype=np.uint8)
-        first_channel = np.zeros((self.width, self.height), dtype=np.uint8)
-        second_channel = np.zeros((self.width, self.height), dtype=np.uint8)
-        third_channel = np.zeros((self.width, self.height), dtype=np.uint8)
+        final_label = np.zeros((height, width), dtype=np.uint8)
+        first_channel = np.zeros((height, width), dtype=np.uint8)
+        second_channel = np.zeros((height, width), dtype=np.uint8)
+        third_channel = np.zeros((height, width), dtype=np.uint8)
 
         upperbody = [0, 1, 2, 3, 4, 5]
         lowerbody = [6, 7, 8]
@@ -238,6 +233,8 @@ class FashionDataset:
         final_label = first_channel + second_channel * 2 + third_channel * 3
         conflict_mask = (final_label <= 3).astype('uint8')
         source = (conflict_mask) * final_label + (1 - conflict_mask) * 1
+        # оставляю маску как в https://github.com/levindabhi/cloth-segmentation/tree/main
+        # чтобы можно было юзать предобученную сегму
 
         source = np.stack([
             (source == 1).astype(int) * 255,
@@ -370,7 +367,6 @@ if __name__ == '__main__':
         df_path='./data/train.csv',
         attributes_path='./data/label_descriptions.json',
         caption_path='./data/caption.csv',
-        resolution=1024,
         max_images=None,
         condition_from_disk=False,
     )

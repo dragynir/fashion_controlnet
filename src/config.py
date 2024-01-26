@@ -27,6 +27,12 @@ class TrainingConfig:
     gradient_checkpointing: bool
     use_8bit_adam: bool
     enable_xformers_memory_efficient_attention: bool
+    set_grads_to_none: bool
+    dataloader_num_workers: int
+
+    proportion_empty_prompts: float
+    adaptive_coords_hw: bool
+    scale_lr: bool
 
     validation_image: List[str]
     validation_prompt: List[str]
@@ -48,11 +54,16 @@ training_config = TrainingConfig(
     learning_rate=1e-5,
     max_train_steps=45000,
     train_batch_size=1,
-    gradient_accumulation_steps=4,
+    gradient_accumulation_steps=16,
     checkpoints_total_limit=1,
     gradient_checkpointing=True,
     use_8bit_adam=True,
     enable_xformers_memory_efficient_attention=False,
+    set_grads_to_none=False,
+    dataloader_num_workers=4,
+    proportion_empty_prompts=0.25,  # 0.5 in original controlnet
+    adaptive_coords_hw=True,
+    scale_lr=True,
     validation_image=['./data/validation/test1.png'],
     validation_prompt=['woman in black and white big scarf, standing'],
     validation_steps=100,
@@ -65,7 +76,6 @@ current_dataset = FashionDataset(
     df_path='./data/train.csv',
     attributes_path='./data/label_descriptions.json',
     caption_path='./data/caption.csv',
-    resolution=512,
     max_images=None,
     condition_from_disk=True,
 )
