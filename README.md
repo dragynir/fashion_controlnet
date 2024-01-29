@@ -96,12 +96,10 @@ TODO
 
 - [ ] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
 - [ ] закрыть todo в readme
-- [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition)
-- [ ] прокинуть параметры в демке (seed и т д)
+- [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
+- [x] прокинуть параметры в демке (seed и т д)
 - [ ] настроить запуск в hugging space
 - [ ] обучить модель а 1024x1024?
 - [ ] обновить видео
 - [ ] Check English spelling
 - [ ] Попробовать добавить в atomatic111
-- [ ] Сравнить генерацию с оригинальной sdxl
-
