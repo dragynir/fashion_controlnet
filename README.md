@@ -96,7 +96,7 @@ TODO
 
 - [ ] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
 - [ ] закрыть todo в readme
-- [ ] прогнать скрипт на 100-200 примеров генерации
+- [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition)
 - [ ] прокинуть параметры в демке (seed и т д)
 - [ ] настроить запуск в hugging space
 - [ ] обучить модель а 1024x1024?
