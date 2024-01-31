@@ -94,7 +94,7 @@ TODO
 
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
-- [ ] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
+- [x] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
 - [ ] сделать colab ноутбук
 - [ ] Check English spelling
 - [ ] обучить более сильную модель
