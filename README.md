@@ -70,7 +70,7 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
 2) Run [clip_caption.py](examples/controlnet/clip_caption.py) to extract prompts from images or use precomputed [file: TODO upload caption.csv to hugginface data/ folder]().
 3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
-4) Validation masks are already in validation [folder](data/validation) TODO put some masks here.
+4) Validation masks are already in validation [folder](data/validation) TODO put some masks here for validation from training!!!!.
 
 #### The final directory structure should be
 
@@ -102,4 +102,5 @@ TODO
   - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
   - добавить примеры в Readme.md
 - [ ] обновить видео
-- [] закончить пункт Run training
+- [ ] переписать скрипт последнего обучения в этой репе 
+- [ ] закончить пункт Run training
