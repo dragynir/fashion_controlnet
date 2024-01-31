@@ -20,13 +20,13 @@ Example image with extracted mask
 
 You can find inference script in [inference.py](src/inference.py). Run it with prepared mask or with image to extract mask first.
 
-Also, check out huggingface space app [TODO space](space). And colab inference script [TODO colab](colab)
+Also, check out huggingface space app [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
+
+You can clone hugging face space, or download it into your machine with gpu. Install requirements.txt and run locally.
 
 # Weights
 
-Trained ControlNet weights for fashion is available on huggingface [space](https://huggingface.co/spaces/dragynir/fashion_controlnet/tree/main/weights) (5 GB)
-TODO - add two versions of model
-
+Trained ControlNet weights for fashion is available on huggingface [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet/tree/main/weights) (5 GB)
 
 # Technical details
 
@@ -51,7 +51,7 @@ With default one i have got NaNs in fp16 training.
 
 2) Added `compute_adaptive_hw` function that prepare `crop_top_left` and `original_image_size` to pass into Unet.
 This helps to match controlnet with original controlnet training, see Micro-Conditioning in original [SDXL paper](https://arxiv.org/pdf/2307.01952.pdf).
-TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! describe
+
 
 3) Adaptive image resizing to keep original image aspect ratio during inference.
 
@@ -95,11 +95,11 @@ TODO
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
 - [ ] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
-- [ ] закрыть todo в readme
-- [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
-  - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
-- [ ] настроить запуск в hugging space
-- [ ] обучить модель а 1024x1024?
-- [ ] обновить видео
+- [ ] сделать colab ноутбук
 - [ ] Check English spelling
-- [ ] Попробовать добавить в atomatic111
+- [ ] обучить более сильную модель
+- - [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
+  - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
+  - добавить примеры в Readme.md
+- [ ] обновить видео
+- [] закончить пункт Run training
