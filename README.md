@@ -2,8 +2,8 @@
 
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-TODO: hugginface space
-TODO: colab using hugging face
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
+
 
 This repo contains training code, inference code and pre-trained model for 
 image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
@@ -75,7 +75,7 @@ TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! describe
 #### The final directory structure should be
 
     .data/
-    ├── train/                   # train images   
+    ├── train/                    # train images   
     │   ├── image1.jpg          
     │   ├── image2.jpg
     ├── train_condition_images/  # train images masks
@@ -93,11 +93,11 @@ TODO
 
 
 # TODO Real TODO list (training 1024, training as SDXL)
-
+- [x] прокинуть параметры в демке (seed и т д)
 - [ ] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
 - [ ] закрыть todo в readme
 - [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
-- [x] прокинуть параметры в демке (seed и т д)
+  - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
 - [ ] настроить запуск в hugging space
 - [ ] обучить модель а 1024x1024?
 - [ ] обновить видео
