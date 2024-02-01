@@ -100,8 +100,8 @@ accelerate launch src/train_controlnet_sdxl.py
 - [x] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
   - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
   - добавить примеры в Readme.md
-- [ ] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
 - [x] закончить пункт Run training
+- [ ] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
 - [ ] обучить более сильную модель
 - [ ] обновить под нову модель, переписать скрипт последнего обучения в этой репе
 - [ ] потестить колаб на открытой репе
