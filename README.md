@@ -134,3 +134,22 @@ accelerate launch src/train_controlnet_sdxl.py
 - [ ] Проверить что все ссылки в Readme.md работают!
 - [ ] Check English spelling
 - [ ] Проставить цитирование (ссылки на код)
+
+
+# TODO app
+
+- [x] научиться записывать демку (научился Screencastify - поставил плагин в гугл)
+- [x] добавить adaptive resize
+- [x] Переписать под RGB input с новой моделью (уберу так плохой код в том числе)
+- [x] прокинуть параметры в демке (seed и т д),
+- [x] добавить negative prompt
+- [x] adaptive resize размеры
+- [x] пофиксить загрузку маски
+- [x] подобрать нормальные промпты к примерам, добавить negative prompt (https://blog.segmind.com/prompt-guide-for-stable-diffusion-xl-crafting-textual-descriptions-for-image-generation/)
+- [x] удалить ненужные веса
+- [x] небольшой рефач - dark theme - можно попробовать
+- [x] проверка ссылок
+- [x] залить версию в main  
+- [x] разобраться с выставлением device в пайплайн
+- [ ] настроить запуск в hugging space
+
