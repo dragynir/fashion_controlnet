@@ -100,7 +100,8 @@ accelerate launch src/train_controlnet_sdxl.py
   - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
   - добавить примеры в Readme.md
 - [x] закончить пункт Run training
-- [ ] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
+- [x] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
+  - [ ] сохранил пока локально - надо будет его отредачить - чтобы было короткое
 - [ ] обучить более сильную модель
 - [ ] обновить под нову модель, переписать скрипт последнего обучения в этой репе
 - [ ] потестить колаб на открытой репе
