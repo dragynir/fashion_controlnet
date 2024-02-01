@@ -95,11 +95,11 @@ accelerate launch src/train_controlnet_sdxl.py
 
 ### Compare conditioned and no condition generations with the same seed.
 
-Mask Condition            |  No Condition
-:-------------------------:|:-------------------------:
-![](assets/compare/condition/image_1.png)  |  ![](assets/compare/no_condition/image_1.png)
-![](assets/compare/condition/image_2.png)  |  ![](assets/compare/no_condition/image_2.png)
-![](assets/compare/condition/image_4.png)  |  ![](assets/compare/no_condition/image_4.png)
+Mask            |                 Condition                 |                 No Condition                 
+:-------------------------:|:-----------------------------------------:|:--------------------------------------------:
+![](assets/compare/mask/image_1.png)  | ![](assets/compare/condition/image_1.png) |  ![](assets/compare/no_condition/image_1.png)
+![](assets/compare/mask/image_2.png)  | ![](assets/compare/condition/image_2.png) |  ![](assets/compare/no_condition/image_2.png)
+![](assets/compare/mask/image_4.png)  | ![](assets/compare/condition/image_4.png) |  ![](assets/compare/no_condition/image_4.png)
 
 
 # TODO Real TODO list (training 1024, training as SDXL)
