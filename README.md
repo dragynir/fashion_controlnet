@@ -70,7 +70,7 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
 2) Run [clip_caption.py](examples/controlnet/clip_caption.py) to extract prompts from images or use precomputed [file: TODO upload caption.csv to hugginface data/ folder]().
 3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
-4) Validation masks are already in validation [folder](data/validation) TODO put some masks here for validation from training!!!!.
+4) Validation masks are already in validation [folder](data/validation).
 
 #### The final directory structure should be
 
@@ -89,18 +89,19 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 
 ### Run training
 
-TODO
-
+```bash
+accelerate launch src/train_controlnet_sdxl.py
+```
 
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
 - [x] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
 - [x] сделать colab ноутбук https://colab.research.google.com/drive/1-SbSkGveuC7ZSohz5nyMib9Iot_5os4c?usp=sharing
-- [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
+- [x] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
   - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
   - добавить примеры в Readme.md
-- [ ] обновить видео
-- [ ] закончить пункт Run training
+- [ ] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
+- [x] закончить пункт Run training
 - [ ] обучить более сильную модель
 - [ ] обновить под нову модель, переписать скрипт последнего обучения в этой репе
 - [ ] потестить колаб на открытой репе
