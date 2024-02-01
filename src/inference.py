@@ -55,7 +55,7 @@ segmentation_model_path = './weights/cloth_segm.pth'
 # directory to write output image
 output_dir = './outputs'
 
-# Example: load image, extract segmentation mask with unet and use it as condition
+# Example: load image, extract segmentation mask with unet and use it as compare
 control_image = load_image(
     './data/train/7fb8e9647ebb8a25d6dc9ab837a36a49.jpg',
 )
@@ -63,7 +63,7 @@ prompt = 'Maya, Brazilian, Tan skin, gorgeous middle aged woman, white backgroun
 is_mask_ready = False
 
 
-# Example: load segmentation mask and use it as condition
+# Example: load segmentation mask and use it as compare
 # control_image = load_image('./data/train_condition_images/7fbe43fc176a8719a42f7e6bb47e4819.png')
 # prompt = 'Maya, Brazilian, Tan skin, gorgeous middle aged woman, white background, short hair, full face, standing, facing front. HD, ((((((((((((show whole body)))))), no shadows, cartoon , wearing a black mini skirt, full frame , 35mm WIDE ANGLE SHOT, 80s STYLES, MAKE IMAGE INTO 3D , coloring book, vector, normal chest'
 # is_mask_ready = True
