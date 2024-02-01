@@ -95,12 +95,13 @@ TODO
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
 - [x] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
-- [ ] сделать colab ноутбук
-- [ ] Check English spelling
-- [ ] обучить более сильную модель
+- [x] сделать colab ноутбук https://colab.research.google.com/drive/1-SbSkGveuC7ZSohz5nyMib9Iot_5os4c?usp=sharing
 - - [ ] прогнать скрипт на 100-200 примеров генерации (prompt, generated with condition, generated without condition(original sdxl))
   - https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 как запускать без condition
   - добавить примеры в Readme.md
 - [ ] обновить видео
-- [ ] переписать скрипт последнего обучения в этой репе 
 - [ ] закончить пункт Run training
+- [ ] обучить более сильную модель
+- [ ] обновить под нову модель, переписать скрипт последнего обучения в этой репе
+- [ ] потестить колаб на открытой репе
+- [ ] Check English spelling
