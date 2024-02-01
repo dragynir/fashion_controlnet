@@ -133,3 +133,4 @@ accelerate launch src/train_controlnet_sdxl.py
 - [ ] потестить колаб на открытой репе
 - [ ] Проверить что все ссылки в Readme.md работают!
 - [ ] Check English spelling
+- [ ] Проставить цитирование (ссылки на код)
