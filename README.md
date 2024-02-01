@@ -92,6 +92,7 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 accelerate launch src/train_controlnet_sdxl.py
 ```
 
+
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
 - [x] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
@@ -102,6 +103,7 @@ accelerate launch src/train_controlnet_sdxl.py
 - [x] закончить пункт Run training
 - [x] обновить видео (пример входной: https://lexica.art/prompt/adfeb3a7-1e74-4809-a681-a8555a7b5d82)
   - [ ] сохранил пока локально - надо будет его отредачить - чтобы было короткое
+- [ ] вставить condition/ no condition примеры
 - [ ] обучить более сильную модель
 - [ ] обновить под нову модель, переписать скрипт последнего обучения в этой репе
 - [ ] потестить колаб на открытой репе
