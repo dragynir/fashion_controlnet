@@ -12,8 +12,8 @@ image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/sta
 
 
 Example image with extracted mask
-![Sample 000](assets/013.png)
 
+TODO добавить вход, маску, генерацию
 
 # Inference
 
