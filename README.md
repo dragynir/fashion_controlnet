@@ -10,9 +10,9 @@ This repo contains training code, inference code and pre-trained model for
 an image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
 
 
-| Input image                                | Mask                                                    | Generated                                                    |
-|--------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------|
-| <img src="assets/input_1.jpg" width="512"> | <img src="assets/compare/mask/image_1.png" width="512"> | <img src="assets/compare/condition/image_1.png" width="512"> |
+| Input image                                              | Mask                                                    | Generated                                                    |
+|----------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------|
+| <img src="assets/input_1.jpg" width="768" height="1024"> | <img src="assets/compare/mask/image_1.png" width="768" height="1024"> | <img src="assets/compare/condition/image_1.png" width="768" height="1024""> |
 
 Prompt: `a woman wearing a white top and jeans with a high waist and a high rise heming hem is standing in front of a white background, Christian Hilfgott Brand, waist up, a photocopy, neoclassicism, ultra quality, sharp focus
 `
