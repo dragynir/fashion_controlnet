@@ -102,6 +102,13 @@ accelerate launch src/train_controlnet_sdxl.py
 | <img src="assets/compare/mask/image_2.png" width="512"> | <img src="assets/compare/condition/image_2.png" width="512"> | <img src="assets/compare/no_condition/image_2.png" width="512"> |
 | <img src="assets/compare/mask/image_4.png" width="512"> | <img src="assets/compare/condition/image_4.png" width="512"> | <img src="assets/compare/no_condition/image_4.png" width="512"> |
 
+
+# Acknowledgements
+- Pretarined U2net model is from [u2net repo](https://github.com/levindabhi/cloth-segmentation). Thanks to levindabhi for amazing repo.
+
+
+
+
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
 - [x] добавить caption.csv в data/ - в этом репосе т к в huggingface нельзя
