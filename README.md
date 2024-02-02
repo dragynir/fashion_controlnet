@@ -94,7 +94,7 @@ accelerate launch src/train_controlnet_sdxl.py
 ```
 
 
-# Compare conditioned and non-conditioned generations using the same seed.
+### Compare conditioned and non-conditioned generations using the same seed.
 
 | Mask                                                    | Condition                                                    | No condition                                                    |
 |---------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------|
