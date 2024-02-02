@@ -39,7 +39,7 @@ For condition i use 3 categories (upper body, lower body and full body).  Inspec
 
 * **Image Caption** : Captions were created with [clip-interrogator](https://github.com/pharmapsychotic/clip-interrogator)
 The CLIP Interrogator is a prompt engineering tool that combines OpenAI's CLIP and Salesforce's BLIP to optimize text prompts to match a given image.
-You can create your own caption with [clip_caption.py](examples/controlnet/clip_caption.py)
+You can create your own caption with [clip_caption.py](src/clip_caption.py)
 
 * **Control Net**:  Training script is based on diffusers script [train_controlnet_sdxl.py](https://github.com/huggingface/diffusers/tree/main/examples/controlnet)
 You can find changed configuration parameters at [config.py](src/config.py).
@@ -70,7 +70,7 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 ### Data Preparation
 
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
-2) Run [clip_caption.py](examples/controlnet/clip_caption.py) to extract prompts from images or use precomputed [file: TODO upload caption.csv to hugginface data/ folder]().
+2) Run [clip_caption.py](src/clip_caption.py) to extract prompts from images or use precomputed from [data/](data) folder.
 3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
 4) Validation masks are already in validation [folder](data/validation).
 
