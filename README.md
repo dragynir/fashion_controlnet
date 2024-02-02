@@ -7,7 +7,7 @@
 
 
 This repo contains training code, inference code and pre-trained model for 
-image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
+an image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
 
 
 | Input image                                | Mask                                                    | Generated                                                    |
@@ -21,21 +21,21 @@ Prompt: `a woman wearing a white top and jeans with a high waist and a high rise
 
 You can find inference script in [inference.py](src/inference.py). Run it with prepared mask or with image to extract mask first.
 
-Also, check out huggingface space app [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
+Also, check out huggingface space [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
 and google colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-SbSkGveuC7ZSohz5nyMib9Iot_5os4c?usp=sharing)
 
-You can clone hugging face space, or download it into your machine with gpu. Install requirements.txt and run locally.
+You can clone hugging face space, or download it into your machine with gpu, install requirements.txt and run locally.
 
 # Weights
 
-Trained ControlNet weights for fashion is available on huggingface [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet/tree/main/weights) (5 GB)
+Trained ControlNet weights for fashion are available on huggingface [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet/tree/main/weights) (5 GB)
 
 # Technical details
 
 * **Condition** : Clothes Segmentation mask, see details in [UNET repo](https://github.com/levindabhi/cloth-segmentation)
 
 * **Image Dataset** : ControlNet was trained on 45k images [iMaterialist (Fashion) 2019 at FGVC6](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset. 
-For condition i use 3 categories (upper body, lower body and full body).  Inspect [dataset.py](src/dataset.py) for better understanding.
+For conditioning, i use 3 categories (upper body, lower body and full body).  Inspect [dataset.py](src/dataset.py) for better understanding.
 
 * **Image Caption** : Captions were created with [clip-interrogator](https://github.com/pharmapsychotic/clip-interrogator)
 The CLIP Interrogator is a prompt engineering tool that combines OpenAI's CLIP and Salesforce's BLIP to optimize text prompts to match a given image.
@@ -47,15 +47,13 @@ You can find changed configuration parameters at [config.py](src/config.py).
 # Major Changes in Training/Inference
 
 1) SDXL's VAE is known to suffer from numerical instability issues.
-So i used [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix) as recomended in diffusers README_sdxl.md.
-With default one i have got NaNs in fp16 training.
+So i used [this one](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix) as recommended in diffusers README_sdxl.md.
+I encountered NaNs during fp16 training with the default vae.
 
+2) I added the `compute_adaptive_hw` function, which prepares `crop_top_left` and `original_image_size` parameters for passing into Unet.
+This adjustment ensures that ControlNet training matches the original SDXL training, see Micro-Conditioning in original [SDXL paper](https://arxiv.org/pdf/2307.01952.pdf).
 
-2) Added `compute_adaptive_hw` function that prepare `crop_top_left` and `original_image_size` to pass into Unet.
-This helps to match controlnet with original controlnet training, see Micro-Conditioning in original [SDXL paper](https://arxiv.org/pdf/2307.01952.pdf).
-
-
-3) Adaptive image resizing to keep original image aspect ratio during inference.
+3) I implemented adaptive image resizing to maintain the original mask's aspect ratio during the inference process.
 
 
 
@@ -71,7 +69,7 @@ This helps to match controlnet with original controlnet training, see Micro-Cond
 
 1) Download and extract [imaterialist-fashion-2019](https://www.kaggle.com/c/imaterialist-fashion-2019-FGVC6/data) dataset to [data/](data) folder.
 2) Run [clip_caption.py](src/clip_caption.py) to extract prompts from images or use precomputed from [data/](data) folder.
-3) Then run [dataset.py](src/dataset.py) to generate and save mask in `.png` format to disc.
+3) Then run [dataset.py](src/dataset.py) to generate and save masks in `.png` format to disc.
 4) Validation masks are already in validation [folder](data/validation).
 
 #### The final directory structure should be
@@ -96,27 +94,13 @@ accelerate launch src/train_controlnet_sdxl.py
 ```
 
 
-### Compare conditioned and non condition generations with the same seed.
+### Compare conditioned and non-conditioned generations using the same seed.
 
 | Mask                                                    | Condition                                                    | No condition                                                    |
 |---------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------|
 | <img src="assets/compare/mask/image_1.png" width="512"> | <img src="assets/compare/condition/image_1.png" width="512"> | <img src="assets/compare/no_condition/image_1.png" width="512"> |
 | <img src="assets/compare/mask/image_2.png" width="512"> | <img src="assets/compare/condition/image_2.png" width="512"> | <img src="assets/compare/no_condition/image_2.png" width="512"> |
 | <img src="assets/compare/mask/image_4.png" width="512"> | <img src="assets/compare/condition/image_4.png" width="512"> | <img src="assets/compare/no_condition/image_4.png" width="512"> |
-
-
-
-[//]: # ()
-[//]: # (Mask            |                 Condition                 |                 No Condition                 )
-
-[//]: # (:-----------------------------------------:|:-----------------------------------------:|:-----------------------------------------:)
-
-[//]: # (![]&#40;assets/compare/mask/image_1.png&#41; | ![]&#40;assets/compare/condition/image_1.png&#41; |  ![]&#40;assets/compare/mask/image_1.png&#41;)
-
-[//]: # (![]&#40;assets/compare/mask/image_2.png&#41; | ![]&#40;assets/compare/condition/image_2.png&#41; |  ![]&#40;assets/compare/no_condition/image_2.png&#41;)
-
-[//]: # (![]&#40;assets/compare/mask/image_4.png&#41; | ![]&#40;assets/compare/condition/image_4.png&#41; |  ![]&#40;assets/compare/no_condition/image_4.png&#41;)
-
 
 # TODO Real TODO list (training 1024, training as SDXL)
 - [x] прокинуть параметры в демке (seed и т д)
