@@ -11,9 +11,9 @@ an image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/
 
 
 <p float="left">
-  <img src="assets/input_1.jpg" width="400" />
-  <img src="assets/input_1.jpg" width="400" />
-  <img src="assets/input_1.jpg" width="400" />
+  <img src="assets/input_1.jpg" width="200" />
+  <img src="assets/input_1.jpg" width="200" />
+  <img src="assets/input_1.jpg" width="200" />
 </p>
 
 
