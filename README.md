@@ -11,6 +11,10 @@ an image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/
 
 <table>
   <tr>
+     <th>Column 1</th>
+     <th>Column 1</th>
+  </tr>
+  <tr>
     <td><img src="assets/input_1.jpg" alt="Image 1"></td>
     <td><img src="assets/input_1.jpg" alt="Image 2"></td>
   </tr>
