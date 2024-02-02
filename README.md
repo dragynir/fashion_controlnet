@@ -10,6 +10,10 @@ This repo contains training code, inference code and pre-trained model for
 an image generation pipeline based on [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) conditioned on [Clothes Segmentation](https://github.com/levindabhi/cloth-segmentation) using U2NET.
 
 
+https://github.com/dragynir/fashion_controlnet/assets/52957857/6edf5682-c337-4c8d-8690-30edb6ed390e
+
+
+
 | Input image                                | Mask                                                    | Generated                                                    |
 |--------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------|
 | <img src="assets/input_1.jpg" width="512"> | <img src="assets/compare/mask/image_1.png" width="512"> | <img src="assets/compare/condition/image_1.png" width="512"> |
