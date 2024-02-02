@@ -3,6 +3,7 @@
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-SbSkGveuC7ZSohz5nyMib9Iot_5os4c?usp=sharing)
 
 
 This repo contains training code, inference code and pre-trained model for 
@@ -21,6 +22,7 @@ Prompt: `a woman wearing a white top and jeans with a high waist and a high rise
 You can find inference script in [inference.py](src/inference.py). Run it with prepared mask or with image to extract mask first.
 
 Also, check out huggingface space app [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/dragynir/fashion_controlnet)
+and google colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-SbSkGveuC7ZSohz5nyMib9Iot_5os4c?usp=sharing)
 
 You can clone hugging face space, or download it into your machine with gpu. Install requirements.txt and run locally.
 
